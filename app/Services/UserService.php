@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\User;
 use App\Repositories\UserRepository;
+use Illuminate\Database\Eloquent\Collection;
 
 class UserService
 {
@@ -14,7 +15,7 @@ class UserService
         $this->userRepository = $repository;
     }
 
-    public function getAll()
+    public function getAll(): Collection
     {
         return $this->userRepository->all();
     }
@@ -24,7 +25,7 @@ class UserService
         return $this->userRepository->findOrFail($id);
     }
 
-    public function save(array $attributes)
+    public function save(array $attributes): User
     {
         $user = $this->userRepository->create($attributes);
         $this->userRepository->save($user);
@@ -38,7 +39,7 @@ class UserService
         return $user;
     }
 
-    public function deleteById(int $id)
+    public function deleteById(int $id): void
     {
         $this->userRepository->delete($id);
     }

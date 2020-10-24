@@ -72,13 +72,9 @@ $app->configure('app');
 |
 */
 
-// $app->middleware([
-//     App\Http\Middleware\ExampleMiddleware::class
-// ]);
-
-// $app->routeMiddleware([
-//     'auth' => App\Http\Middleware\Authenticate::class,
-// ]);
+$app->routeMiddleware([
+    'auth' => App\Http\Middleware\Authenticate::class,
+]);
 
 /*
 |--------------------------------------------------------------------------
@@ -91,6 +87,8 @@ $app->configure('app');
 |
 */
 
+$app->register(App\Providers\AuthServiceProvider::class);
+$app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
 $app->register(App\Providers\ValidatorProvider::class);
 
 /*
@@ -108,6 +106,13 @@ $app->router->group([
     'namespace' => 'App\Http\Controllers',
 ], function ($router) {
     require __DIR__ . '/../routes/web.php';
+});
+
+$app->router->group([
+    'namespace' => 'App\Http\Controllers',
+    'middleware' => 'auth:api',
+], function ($router) {
+    require __DIR__ . '/../routes/api.php';
 });
 
 return $app;

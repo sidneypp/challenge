@@ -55,9 +55,9 @@ class UserController extends Controller
         return response($user);
     }
 
-    public function delete(int $id)
+    public function destroy(int $id)
     {
         $this->userService->deleteById($id);
-        return response(null, Response::HTTP_NO_CONTENT);
+        return response([], Response::HTTP_NO_CONTENT);
     }
 }
