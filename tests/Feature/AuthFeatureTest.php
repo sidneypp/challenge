@@ -4,13 +4,13 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Http\Response;
-use Laravel\Lumen\Testing\DatabaseTransactions;
+use Laravel\Lumen\Testing\DatabaseMigrations;
 use Tests\Helpers\AuthHelper;
 use Tests\TestCase;
 
 class AuthFeatureTest extends TestCase
 {
-    use AuthHelper, DatabaseTransactions;
+    use AuthHelper, DatabaseMigrations;
 
     const AUTH_END_POINT = 'auth';
     const DEFAULT_PASSWORD = '12345678';
@@ -34,7 +34,7 @@ class AuthFeatureTest extends TestCase
     public function testShouldReturn204WhenAnAuthIsDeleted()
     {
         $user = User::factory()->create();
-        $response = $this->authAs($user)->delete(self::AUTH_END_POINT);
+        $response = $this->actingAs($user)->delete(self::AUTH_END_POINT);
         $response->assertResponseStatus(Response::HTTP_NO_CONTENT);
     }
 }
