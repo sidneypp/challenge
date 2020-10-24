@@ -19,6 +19,8 @@ jobs:
       run: |
         mkdir -p database
         touch database/database.sqlite
+    - name: Create a Secret Key to JWT
+      run: php artisan jwt:secret
     - name: Check mess via PHP Mess Detector
       run: vendor/bin/phpmd app text phpmd-ruleset.xml
     - name: Check code style via PHP Code Sniffer
