@@ -23,9 +23,9 @@ class UserController extends Controller
         return response($users);
     }
 
-    public function show(Request $request)
+    public function show(int $id)
     {
-        $user = $this->userService->findOrFail($request->id);
+        $user = $this->userService->findOrFail($id);
         return response($user);
     }
 
@@ -42,7 +42,7 @@ class UserController extends Controller
         return response($user, Response::HTTP_CREATED);
     }
 
-    public function update(Request $request)
+    public function update(Request $request, int $id)
     {
         $validatedData = $this->validate($request, [
             'name' => 'sometimes|string|max:255',
@@ -51,13 +51,13 @@ class UserController extends Controller
             'password' => 'sometimes|min:8',
             'type' => ['sometimes', Rule::in([UserTypes::CUSTOMER, UserTypes::SELLER])]
         ]);
-        $user = $this->userService->updateById($request->id, $validatedData);
+        $user = $this->userService->updateById($id, $validatedData);
         return response($user);
     }
 
-    public function delete(Request $request)
+    public function delete(int $id)
     {
-        $this->userService->deleteById($request->id);
+        $this->userService->deleteById($id);
         return response(null, Response::HTTP_NO_CONTENT);
     }
 }

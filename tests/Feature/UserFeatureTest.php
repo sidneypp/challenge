@@ -11,7 +11,7 @@ class UserFeatureTest extends TestCase
 {
     use DatabaseMigrations;
 
-    const USERS_END_POINT = 'users';
+    const USERS_END_POINT = 'user';
 
     public function testShouldReturn200WhenListingUsers()
     {
@@ -43,7 +43,7 @@ class UserFeatureTest extends TestCase
     public function testShouldReturn204WhenAUserIsDeleted()
     {
         $user = User::factory()->create();
-        $response = $this->post(self::USERS_END_POINT . "/$user->id");
+        $response = $this->delete(self::USERS_END_POINT . "/$user->id");
         $response->assertResponseStatus(Response::HTTP_NO_CONTENT);
     }
 }
