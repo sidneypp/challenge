@@ -2,17 +2,17 @@
 
 namespace Tests\Helpers;
 
-use App\Models\User;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Auth;
 
 trait AuthHelper
 {
     private $headers = [];
 
-    public function actingAs(User $user)
+    public function actingAs(Authenticatable $user, $driver = null)
     {
         $token = Auth::guard()->fromUser($user);
-        parent::actingAs($user);
+        parent::actingAs($user, $driver);
         Auth::guard()->setToken($token);
 
         return $this;
