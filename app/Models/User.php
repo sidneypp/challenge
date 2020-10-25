@@ -37,6 +37,11 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return $this->belongsTo(Role::class);
     }
 
+    public function wallets()
+    {
+        return $this->hasMany(Wallet::class);
+    }
+
     public function hasPermission(string $permission): bool
     {
         return $this->role->hasPermission($permission);
