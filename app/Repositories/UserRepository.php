@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 class UserRepository
 {
-    public function findOrFail(int $id): ?User
+    public function findOrFail(int $id): User
     {
         return User::findOrFail($id);
     }

@@ -13,12 +13,11 @@ class AuthFeatureTest extends TestCase
     use AuthHelper, DatabaseMigrations;
 
     const AUTH_END_POINT = 'auth';
-    const DEFAULT_PASSWORD = '12345678';
 
     public function testShouldReturn201WhenAnAuthIsCreated()
     {
-        $user = User::factory()->create(['password' => self::DEFAULT_PASSWORD]);
-        $credentials = ['email' => $user->email, 'password' => self::DEFAULT_PASSWORD];
+        $user = User::factory()->create();
+        $credentials = ['email' => $user->email, 'password' => '12345678'];
         $response = $this->post(self::AUTH_END_POINT, $credentials);
         $response->assertResponseStatus(Response::HTTP_CREATED);
     }

@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Arr;
 use Illuminate\Validation\ValidationException;
 use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -25,6 +26,14 @@ class Handler extends ExceptionHandler
 
     public function render($request, Throwable $exception)
     {
+        if ($exception instanceof AuthorizationException) {
+            throw AuthorizationExceptions::unauthorized();
+        } elseif ($exception instanceof ModelNotFoundException) {
+            $id = Arr::first($exception->getIds());
+            $model = Arr::last(explode("\\", $exception->getModel()));
+            throw ModelExceptions::notFound($id, $model);
+        }
+
         return parent::render($request, $exception);
     }
 }
