@@ -5,6 +5,7 @@ namespace Tests\Helpers;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Wallet;
 
 class UserBuilder
 {
@@ -22,7 +23,7 @@ class UserBuilder
             ? Permission::factory(['slug' => $this->permission])
             : Permission::factory();
         $role = Role::factory()->has($permission);
-        return User::factory()->create(['role_id' => $role]);
+        return User::factory()->has(Wallet::factory())->create(['role_id' => $role]);
     }
 
     public static function make(): UserBuilder
