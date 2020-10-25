@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Enumerators\UserTypes;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -17,7 +17,7 @@ class UserFactory extends Factory
             'cpf' => $this->faker->cpf,
             'email' => $this->faker->unique()->safeEmail,
             'password' => '12345678',
-            'type' => $this->faker->randomElement([UserTypes::CUSTOMER, UserTypes::SELLER])
+            'role_id' => Role::factory()
         ];
     }
 }

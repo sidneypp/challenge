@@ -22,12 +22,25 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'cpf',
         'email',
         'password',
-        'type'
+        'role_id'
     ];
 
     protected $hidden = [
         'password',
+        'created_at',
+        'updated_at',
+        'deleted_at'
     ];
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    public function hasPermission(string $permission): bool
+    {
+        return $this->role->hasPermission($permission);
+    }
 
     public function setCpfAttribute($value)
     {
