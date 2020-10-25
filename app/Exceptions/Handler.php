@@ -32,6 +32,8 @@ class Handler extends ExceptionHandler
             $id = Arr::first($exception->getIds());
             $model = Arr::last(explode("\\", $exception->getModel()));
             throw ModelExceptions::notFound($id, $model);
+        } elseif ($exception instanceof ValidationException) {
+            throw ValidationExceptions::invalid($exception->validator->errors()->first());
         }
 
         return parent::render($request, $exception);
