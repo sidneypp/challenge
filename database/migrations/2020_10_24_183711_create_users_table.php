@@ -15,7 +15,6 @@ class CreateUsersTable extends Migration
             $table->string('cpf')->unique()->index();
             $table->string('email')->unique()->index();
             $table->string('password');
-            $table->decimal('wallet')->default(0);
             $table->unsignedBigInteger('role_id');
 
             $table->timestamps();
