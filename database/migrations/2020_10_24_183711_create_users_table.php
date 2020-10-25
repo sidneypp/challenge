@@ -15,9 +15,13 @@ class CreateUsersTable extends Migration
             $table->string('cpf')->unique()->index();
             $table->string('email')->unique()->index();
             $table->string('password');
-            $table->string('type')->default(UserTypes::CUSTOMER);
+            $table->decimal('wallet')->default(0);
+            $table->unsignedBigInteger('role_id');
+
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('role_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
