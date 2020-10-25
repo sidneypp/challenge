@@ -15,3 +15,9 @@ $router->group(['prefix' => 'user'], function () use ($router) {
     $router->put('/{id}', 'UserController@update');
     $router->delete('/{id}', 'UserController@destroy');
 });
+
+$router->group(['prefix' => 'transaction'], function () use ($router) {
+    $router->get('/', 'TransactionController@index');
+    $router->get('/{id}', 'TransactionController@show');
+    $router->post('/', 'TransactionController@store');
+});

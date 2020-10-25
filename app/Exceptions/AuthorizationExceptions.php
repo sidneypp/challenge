@@ -4,12 +4,19 @@ namespace App\Exceptions;
 
 use Illuminate\Http\Response;
 
-class AuthorizationExceptions extends BuildException
+class AuthorizationExceptions
 {
     public static function unauthorized()
     {
-        return self::new()
+        return BuildException::new()
             ->setMessage(trans('exception.action_unauthorized'))
+            ->setHttpCode(Response::HTTP_UNAUTHORIZED);
+    }
+
+    public static function unavailable(string $message)
+    {
+        return BuildException::new()
+            ->setMessage($message)
             ->setHttpCode(Response::HTTP_UNAUTHORIZED);
     }
 }

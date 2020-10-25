@@ -4,11 +4,11 @@ namespace App\Exceptions;
 
 use Illuminate\Http\Response;
 
-class ValidationExceptions extends BuildException
+class ValidationExceptions
 {
     public static function invalid(string $message)
     {
-        return self::new()
+        return BuildException::new()
             ->setMessage($message)
             ->setHttpCode(Response::HTTP_BAD_REQUEST);
     }

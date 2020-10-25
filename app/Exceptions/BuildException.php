@@ -4,7 +4,7 @@ namespace App\Exceptions;
 
 use Exception;
 
-abstract class BuildException extends Exception
+class BuildException extends Exception
 {
     protected $message = '';
 
@@ -34,7 +34,7 @@ abstract class BuildException extends Exception
         ]);
     }
 
-    protected static function new()
+    public static function new()
     {
         return new static();
     }
