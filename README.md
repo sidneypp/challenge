@@ -37,7 +37,7 @@ Requisitos:
 A documentação dos endpoints pode ser utilizada via Postman através do URL https://documenter.getpostman.com/view/4703011/TVYF8eH5
 
 ### Importante
-Sempre fique atento que não exista outro processo rodando nas portas 8000, 9000 e 3306 pois serão as portas utilizadas ao executar o docker
+Sempre fique atento que não exista outro processo rodando nas portas 8000, 9000 e 3306, pois, serão as portas utilizadas ao executar o docker
 
-### Tests
-Para rodar os testes, apos os containers estarem de "pé", execute em seu terminal: vendor/bin/phpunit
+### Testes
+Para rodar os testes, após os containers estarem rodando, execute no seu terminal: vendor/bin/phpunit
